@@ -18,7 +18,6 @@ import java.util.*;
 public class UserController {
     @Autowired
     UserRepository userRepository;
-    @Autowired
     MuseumRepository museumRepository;
 
     @GetMapping("/users")

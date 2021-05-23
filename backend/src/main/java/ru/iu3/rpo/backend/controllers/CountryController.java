@@ -3,7 +3,7 @@ package ru.iu3.rpo.backend.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
+import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import ru.iu3.rpo.backend.models.Artist;
@@ -23,10 +23,18 @@ public class CountryController {
         return countryRepository.findAll();
     }
 
-
+    @GetMapping("/countries/{id}/artists")
+    public ResponseEntity<List<Artist>> getCountryArtists(@PathVariable(value = "id") Long countryId){
+        Optional<Country> cc = countryRepository.findById(countryId);
+        if (cc.isPresent())
+        {
+            return ResponseEntity.ok(cc.get().artists);
+        }
+        return ResponseEntity.ok(new ArrayList<Artist>());
+    }
 
     @PostMapping("/countries")
-    public ResponseEntity<Object> createCountry( @RequestBody Country country){
+    public ResponseEntity<Object> createCountry(@Valid @RequestBody Country country){
         try {
             Country nc = countryRepository.save(country);
             return new ResponseEntity<Object>(nc, HttpStatus.OK);
@@ -46,7 +54,7 @@ public class CountryController {
 
     @PutMapping("/countries/{id}")
     public ResponseEntity<Country> updateCountry(@PathVariable(value = "id") Long countryId,
-                                                  @RequestBody Country countryDetails) {
+                                                 @Valid @RequestBody Country countryDetails) {
         Country country = null;
         Optional<Country> cc = countryRepository.findById(countryId);
         if (cc.isPresent())
@@ -79,15 +87,4 @@ public class CountryController {
         }
         return response;
     }
-
-    @GetMapping("/countries/{id}/artists")
-    public ResponseEntity<List<Artist>> getCountryArtists(@PathVariable(value = "id") Long countryId){
-        Optional<Country> cc = countryRepository.findById(countryId);
-        if (cc.isPresent())
-        {
-            return ResponseEntity.ok(cc.get().artists);
-        }
-        return ResponseEntity.ok(new ArrayList<Artist>());
-    }
-
 }
