@@ -13,6 +13,7 @@ class Home extends React.Component {
             </div>
         );
     }
+
 }
 
 export default Home;
