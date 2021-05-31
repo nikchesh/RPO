@@ -5,7 +5,7 @@ import {faEdit, faPlus, faTrash} from "@fortawesome/free-solid-svg-icons";
 import Alert from "./Alert";
 import PaginationComponent from "./PaginationComponent";
 
-class CountryListComponent extends Component {
+class UserListComponent extends Component {
 
     constructor(props) {
         super(props);
@@ -187,4 +187,4 @@ class CountryListComponent extends Component {
     }
 }
 
-export default CountryListComponent;
+export default UserListComponent;

@@ -42,7 +42,9 @@
     ]
   },
   "devDependencies": {
+    "formik": "^2.2.8",
     "history": "^5.0.0",
+    "prop-types": "^15.7.2",
     "react-redux": "^7.2.4",
     "react-router-dom": "^5.2.0"
   }
